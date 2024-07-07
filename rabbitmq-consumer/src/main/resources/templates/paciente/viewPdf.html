@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" />
+    <style>
+        body {
+            text-align: center; /* Centraliza todo o conteúdo do body */
+        }
+        .container {
+            display: inline-block; /* Mantém o conteúdo centralizado */
+            text-align: left; /* Alinha o texto interno à esquerda */
+        }
+        .centered-title {
+            margin-top: 20px; /* Adiciona espaço acima do título */
+        }
+        .section-title {
+            color: #0066cc;
+            font-size: 24px;
+            margin-top: 20px;
+        }
+        .section-content {
+            margin-bottom: 20px;
+        }
+    </style>
+    <title>Ficha do Paciente</title>
+</head>
+<body>
+    <div class="container">
+        <h3 class="centered-title">Ficha do Paciente</h3>
+        <hr />
+        <div class="section-title">Dados Pessoais</div>
+        <div class="section-content">
+            <p>ID: [[${paciente.id}]]</p>
+            <p>Nome: [[${paciente.nomeCompleto != null} ? ${paciente.nomeCompleto} : '']]</p>
+            <p>CPF: [[${paciente.cpf}]]</p>
+            <p>Data de Nascimento: [[${paciente.dataNascimento}]]</p>
+            <p>Sexo: [[${paciente.sexo}]]</p>
+        </div>
+        <div class="section-title">Dados de Contato</div>
+        <div class="section-content">
+            <p>E-mail: [[${paciente.email}]]</p>
+            <p>Celular: [[${paciente.celular}]]</p>
+        </div>
+        <div class="section-title">Endereço</div>
+        <div class="section-content">
+            <p>Rua: [[${paciente.rua}]]</p>
+            <p>Bairro: [[${paciente.bairro}]]</p>
+            <p>Cidade: [[${paciente.cidade}]]</p>
+            <p>Estado: [[${paciente.estado}]]</p>
+            <p>CEP: [[${paciente.cep}]]</p>
+            <p>Número: [[${paciente.numero}]]</p>
+        </div>
+        <div class="section-title">Dados Médicos</div>
+        <div class="section-content">
+            <p>Gestante: [[${paciente.gestante}]]</p>
+            <p>Febre: [[${paciente.febre}]]</p>
+            <p>Exame: [[${paciente.exame}]]</p>
+            <p>Data do Diagnóstico: [[${paciente.diagnostico}]]</p>
+            <p>Sintomas: [[${paciente.sintomas}]]</p>
+        </div>
+    </div>
+</body>
+</html>

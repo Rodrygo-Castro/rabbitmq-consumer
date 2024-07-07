@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Cadastro de Paciente com Dengue</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            padding-top: 40px;
+            margin: 0;
+        }
+
+        h2 {
+            font-size: 28px;
+            color: #007bff;
+        }
+
+        label {
+            font-weight: bold;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .form-control {
+            font-size: 16px;
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #0056b3;
+        }
+
+        .footer {
+            background-color: #007bff;
+            color: #ffffff;
+            padding: 5px 5px;
+            text-align: center;
+            margin-top: auto;
+            width: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav th:replace="~{paciente/fragments/menu :: menu}" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+    </nav>
+    <div class="container mt-4">
+        <h2>Cadastro de Paciente com Dengue</h2>
+        <hr>
+        <div>
+            <a class="btn btn-primary" th:href="@{/pacientes/list}">Voltar</a>
+        </div>
+        <hr>
+        <form th:object="${pacienteModel}">
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Informações Pessoais -->
+            <div class="card">
+                <div class="card-header">
+                    Informações Pessoais
+                </div>
+                <div class="card-body">
+                    <div class="form-group">
+                        <label for="nomeCompleto">Nome Completo:</label>
+                        <input type="text" class="form-control" id="nomeCompleto" th:field="*{nomeCompleto}" readonly>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="dataNascimento">Data de Nascimento:</label>
+                            <input type="date" class="form-control" id="dataNascimento" th:field="*{dataNascimento}"
+                                readonly>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="sexo">Gênero:</label>
+                            <select class="form-control" id="sexo" th:field="*{sexo}" disabled>
+                                <option value="">Escolha uma Opção</option>
+                                <option value="MASCULINO">Masculino</option>
+                                <option value="FEMININO">Feminino</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="cpf">CPF:</label>
+                            <input type="text" class="form-control" id="cpf" th:field="*{cpf}"
+                                placeholder="000.000.000-00" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Informações de Contato -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Informações de Contato
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <label for="celular">Celular:</label>
+                            <input type="text" class="form-control" id="celular" th:field="*{celular}"
+                                placeholder="(00) 00000-0000" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="email">E-mail:</label>
+                            <input type="email" class="form-control" id="email" th:field="*{email}"
+                                placeholder="exemplo@email.com" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Informações de Localização -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Informações de Localização
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-5">
+                            <label for="bairro">Bairro:</label>
+                            <input type="text" class="form-control" id="bairro" th:field="*{bairro}" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="cidade">Município:</label>
+                            <input type="text" class="form-control" id="cidade" th:field="*{cidade}" readonly>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="estado">UF:</label>
+                            <input type="text" class="form-control" id="estado" th:field="*{estado}" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="rua">Rua:</label>
+                            <input type="text" class="form-control" id="rua" th:field="*{rua}" readonly>
+                        </div>
+                        <div class="form-group col-md-5">
+                            <label for="cep">Cep:</label>
+                            <input type="text" class="form-control" id="cep" th:field="*{cep}" readonly>
+                        </div>
+                        <div class="form-group col-md-2">
+                            <label for="numero">Número:</label>
+                            <input type="text" class="form-control" id="numero" th:field="*{numero}" readonly>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Informações de Saúde -->
+            <div class="card mb-4">
+                <div class="card-header">
+                    Informações de Saúde
+                </div>
+                <div class="card-body">
+                    <div class="form-row">
+                        <div class="form-group col-md-4">
+                            <label for="gestante">Gestante:</label>
+                            <select class="form-control" id="gestante" th:field="*{gestante}" disabled>
+                                <option value="">Escolha uma Opção</option>
+                                <option value="SIM">Sim</option>
+                                <option value="NAO">Não</option>
+                                <option value="NA">Não se Aplica</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="febre">Febre:</label>
+                            <select class="form-control" id="febre" th:field="*{febre}" disabled>
+                                <option value="">Escolha uma Opção</option>
+                                <option value="SIM">Sim</option>
+                                <option value="NAO">Não</option>
+                            </select>
+                        </div>
+                        <div class="form-group col-md-4">
+                            <label for="diagnostico">Data do Diagnóstico:</label>
+                            <input type="date" class="form-control" id="diagnostico" th:field="*{diagnostico}" readonly>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="sintomas">Sintomas Relatados:</label>
+                            <textarea class="form-control" id="sintomas" name="sintomas" rows="3" th:field="*{sintomas}"
+                                readonly></textarea>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label for="exame">Resultados de Exames:</label>
+                            <textarea class="form-control" id="exame" name="exame" rows="3" th:field="*{exame}"
+                                readonly></textarea>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+    <!-- Footer -->
+    <div th:replace="~{paciente/fragments/footer :: footer}" class="footer">© 2024 Minha Aplicação. Todos os direitos
+        reservados.</div>
+
+    <!-- Incluindo jQuery e Bootstrap JS (no final do body para melhor performance) -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <!-- Incluindo jQuery Mask para máscaras de input -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.mask/1.14.16/jquery.mask.min.js"></script>
+    <!-- Aplicando máscara de CPF -->
+    <script>
+        $(document).ready(function () {
+            $('#cpf').mask('000.000.000-00');
+            $('#celular').mask('(00) 00000-0000');
+            $('#cep').mask('00000-000');
+        });
+    </script>
+</body>
+
+</html>

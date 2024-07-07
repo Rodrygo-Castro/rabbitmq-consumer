@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Lista de Pacientes</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Estilos personalizados para o menu */
+        body {
+            padding-top: 80px; /* Ajustar o conteúdo abaixo do menu fixo */
+        }
+
+        .navbar {
+            background-color: #343a40; /* Nova cor de fundo do menu (cinza escuro) */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte do texto do menu */
+            font-size: 18px; /* Tamanho da fonte do menu */
+        }
+
+        .navbar-brand {
+            font-size: 1.8rem; /* Tamanho maior da fonte da marca */
+            font-weight: bold; /* Fonte em negrito para a marca */
+        }
+
+        .navbar-nav .nav-link {
+            padding: 0.5rem 1.2rem; /* Aumentar o espaçamento interno dos links */
+            margin-right: 15px; /* Aumentar o espaçamento entre os links */
+        }
+
+        .navbar-nav .nav-link:hover {
+            color: #adb5bd; /* Cor do texto ao passar o mouse sobre os links */
+        }
+
+        /* Estilos personalizados para o footer */
+        .footer {
+            background-color: #343a40; /* Cor de fundo do footer (cinza escuro) */
+            color: #adb5bd; /* Cor do texto do footer (cinza claro) */
+            padding: 10px 0; /* Espaçamento interno do footer */
+            font-size: 16px; /* Tamanho da fonte do footer */
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* Fonte moderna e elegante */
+            text-align: center;
+        }
+
+        .footer p {
+            margin: 0; /* Remover margens do parágrafo */
+        }
+    </style>
+</head>
+<body>
+<!-- Navbar -->
+<nav th:replace="~{paciente/fragments/menu :: menu}" class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top"></nav>
+
+<div class="container mt-4">
+    <h2>Lista de Pacientes</h2>
+    <hr>
+    <div th:if="${!#strings.isEmpty(feedback)}" class="alert alert-success" role="alert">
+        <span th:text="${feedback}"></span>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-bordered table-hover">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Nome Completo</th>
+                <th>Sexo</th>
+                <th>CPF</th>
+                <th>Data de Nascimento</th>
+                <th>Ações</th>
+            </tr>
+            </thead>
+            <tbody>
+            <!-- Verifica se a lista de pacientes não está vazia -->
+            <th:block th:if="${not #lists.isEmpty(pacienteModel)}">
+                <tr th:each="paciente : ${pacienteModel}">
+                    <td th:text="${paciente.id}"></td>
+                    <td th:text="${paciente.nomeCompleto}"></td>
+                    <td th:text="${paciente.sexo}"></td>
+                    <td th:text="${paciente.cpf}"></td>
+                    <td th:text="${paciente.dataNascimento}"></td>
+                    <td>
+                        <a th:href="@{/pacientes/edit/{id}(id=${paciente.id})}" class="btn btn-warning btn-sm">Visualizar</a>
+                        <a th:href="@{/pacientes/gerarPdf/{id}(id=${paciente.id})}" class="btn btn-info btn-sm" target="_blank">Arquivo PDF</a>
+                    </td>
+                </tr>
+            </th:block>
+            <!-- Se a lista de pacientes estiver vazia -->
+            <th:block th:unless="${not #lists.isEmpty(pacienteModel)}">
+                <tr>
+                    <td colspan="6" class="text-center">Nenhum paciente encontrado</td>
+                </tr>
+            </th:block>
+            </tbody>
+        </table>
+    </div>
+    <hr>
+</div>
+
+<!-- Footer -->
+<div th:replace="~{paciente/fragments/footer :: footer}" class="footer">© 2024 Minha Aplicação. Todos os direitos reservados.</div>
+
+<!-- Incluindo jQuery e Bootstrap JS (no final do body para melhor performance) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
